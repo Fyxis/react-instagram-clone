@@ -13,7 +13,7 @@ const registerApi = async (credentials, navigate, navigateTo) => {
             navigate(navigateTo, { replace: true });
         }
     } catch (error) {
-        alert(error.response.data.message)
+        alert(error)
     }
 }
 

@@ -32,7 +32,7 @@ const LoginAuth = () => {
             setIsNavigating(true)
             loginApi(credentials, login, navigate, "/home")
         } catch (error) {
-            alert('Login failed. Please try again.')
+            alert('Error in server')
         } finally {
             setTimeout(() => {
                 setIsNavigating(false)

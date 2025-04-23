@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import React from 'react'
 
@@ -21,7 +22,8 @@ const loginApi = async (credentials, login, navigate, navigateTo) => {
             navigate(navigateTo, { replace: true });
         }
     } catch (error) {
-        console.error("Login failed:", error);
+        alert("Login failed. Please try again.");
+        // console.error("Login failed:", error);
     }
 }
 
