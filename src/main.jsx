@@ -5,11 +5,14 @@ import './index.css'
 import ReactRoute from './ReactRoutes.jsx'
 import { AuthProvider } from './context/authContext.jsx'
 import { LoadingProvider } from './context/loadingContext.jsx'
+import { ToastProvider } from './context/toastContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <AuthProvider>
     <LoadingProvider>
-      <ReactRoute />
+      <ToastProvider>
+        <ReactRoute />
+      </ToastProvider>
     </LoadingProvider>
   </AuthProvider>,
 )

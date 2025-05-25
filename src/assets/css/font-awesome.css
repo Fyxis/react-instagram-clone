@@ -1,0 +1,67 @@
+:root {
+    --icons-bookmark-path: url('../svg/bookmark.svg');
+    --icons-square-path: url('../svg/square.svg');
+    --icons-user-path: url('../svg/user.svg');
+    --icons-table-cells-large-path: url('../svg/table-cells-large.svg');
+    --icons-heart-path: url('../svg/heart.svg');
+    --icons-comment-path: url('../svg/comment.svg');
+    --icons-paper-plane-path: url('../svg/paper-plane.svg');
+    --icons-widht: 17px;
+    --icons-height: 17px;
+}
+
+.table-cells-large {
+    background-image: var(--icons-table-cells-large-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.square {
+    background-image: var(--icons-square-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.bookmark {
+    background-image: var(--icons-bookmark-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.user {
+    background-image: var(--icons-user-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.heart {
+    background-image: var(--icons-heart-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.comment {
+    background-image: var(--icons-comment-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}
+
+.paper-plane {
+    background-image: var(--icons-paper-plane-path);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--icons-widht);
+    height: var(--icons-height);
+}

@@ -1,6 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+// import { useLocation, useNavigate } from 'react-router-dom'
+import createPostApi from "../../api/createPostApi";
+import { useToast } from "../../context/toastContext";
 
 const CreatePostModal = ({ isOpen, onClose}) => {
+    const [errorMessage, setErrorMessage] = useState(null)
+    const toast = useToast();
+
+    const MAX_FILE_SIZE_MB = 3; // 3MB limit
+    const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
     useEffect(() => {
         const textarea = document.getElementById('description');
         const handleKeyDown = (event) => {
@@ -20,6 +29,50 @@ const CreatePostModal = ({ isOpen, onClose}) => {
             }
         };
     }, []);
+
+    const handleChange = event => {
+        const file = event.target.files[0];
+
+        if (file) {
+            if (file.size > MAX_FILE_SIZE_BYTES) {
+                setErrorMessage('File size exceeds the limit (3MB).');
+                event.target.value = ""
+                return;
+            }
+            setErrorMessage('');
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const fileInput = document.getElementById("file_input");
+        const captionInput = document.querySelector("textarea#description");
+
+        if (fileInput.files.length === 0) {
+            alert("Please select a file.");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const caption = captionInput.value;
+
+        const data = new FormData();
+        data.append("post_image", file);
+        data.append("caption", caption);
+
+        try {
+            await createPostApi(data);
+
+            toast.success('Post created successfully!');
+
+            window.location.reload()
+            onClose();
+        } catch (error) {
+            console.error("Error uploading post:", error);
+            toast.error('Failed to create post!');
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -49,7 +102,6 @@ const CreatePostModal = ({ isOpen, onClose}) => {
                             >
                                 <svg
                                     className="w-3 h-3"
-                                    // aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 14 14"
@@ -69,9 +121,9 @@ const CreatePostModal = ({ isOpen, onClose}) => {
                         <form
                             className="p-4 md:p-5"
                             id="form_addContent"
-                            action="../controllers/addContent.php"
                             method="post"
                             encType="multipart/form-data"
+                            onSubmit={handleSubmit}
                         >
                             <div className="grid gap-4 mb-4 grid-cols-2">
                                 <div className="col-span-2">
@@ -89,6 +141,7 @@ const CreatePostModal = ({ isOpen, onClose}) => {
                                         name="content-image"
                                         accept=".jpg, .jpeg, .png"
                                         required
+                                        onChange={handleChange}
                                     />
                                     <p
                                         className="mt-1 text-sm text-gray-500 dark:text-gray-300"
@@ -110,15 +163,19 @@ const CreatePostModal = ({ isOpen, onClose}) => {
                                         className="block p-2.5 resize-none w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         name="content-caption"
                                         placeholder="Write caption here..."
-                                        required
                                     ></textarea>
+                                    <p className="text-red-500">
+                                    {(errorMessage || errorMessage !== null) ?? (
+                                        {errorMessage}
+                                    )}
+                                    </p>
                                 </div>
                             </div>
                             <div className="w-full flex flex-row justify-end md:justify-start">
                                 <button
                                     type="submit"
                                     id="btn_submitAddContent"
-                                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:cursor-pointer"
                                 >
                                     <svg
                                         className="me-1 -ms-1 w-5 h-5"

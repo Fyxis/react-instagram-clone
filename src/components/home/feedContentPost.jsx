@@ -61,7 +61,7 @@ const FeedContentPost = () => {
                         </div>
                         {/* <!-- MAIN CONTENT --> */}
                         <div className="w-full h-[500px] my-4 rounded-md bg-gray-500">
-                            <Image src="./img/post/735-Mazda.jpeg" alt="feed content" className="h-full w-full object-cover rounded-md"/>
+                            <Image src="./img/post/1-post.jpg" alt="feed content" className="h-full w-full object-cover rounded-md"/>
                         </div>
                         {/* <!-- LIKE, COMMENT, DIRECT MESSAGES --> */}
                         <div className="flex flex-row justify-between w-full">

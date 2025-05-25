@@ -8,6 +8,7 @@ const registerApi = async (credentials, navigate, navigateTo) => {
             `${API_URL}/instagram/auth/register`,
             credentials
         );
+        console.log(response.data)
         if(response.status === 200) {
             alert("Register success, please login!");
             navigate(navigateTo, { replace: true });

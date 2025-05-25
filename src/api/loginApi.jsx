@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
-import React from 'react'
+import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -13,18 +12,17 @@ const loginApi = async (credentials, login, navigate, navigateTo) => {
 
         if (response.status === 200) {
             // Simpan token ke localStorage
-            localStorage.setItem("authToken", response.data.data.token);
+            localStorage.setItem("authToken", response.data.data.accessToken);
 
             // Update context state
-            login(response.data.data.token);
+            login(response.data.data.accessToken);
 
             // Navigasi
             navigate(navigateTo, { replace: true });
         }
     } catch (error) {
         alert("Login failed. Please try again.");
-        // console.error("Login failed:", error);
     }
-}
+};
 
-export default loginApi
+export default loginApi;

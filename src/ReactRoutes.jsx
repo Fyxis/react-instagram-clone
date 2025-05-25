@@ -13,6 +13,8 @@ import Register from "./layouts/auth/registerAuth";
 import Home from "./layouts/home/home";
 import "./assets/css/flowbite.css";
 import LoadingScreen from "./components/ui/loadingScreen";
+import Profile from "./layouts/profile/profile";
+import { useEffect } from "react";
 
 const PrivateRoute = () => {
     const { checkAuth } = useAuth();
@@ -28,6 +30,10 @@ const PrivateRoute = () => {
 const ReactRoute = () => {
     const { isNavigating } = useApp();
 
+    useEffect(() => {
+        document.title = `SnapFlow - A Place to Create Through Images`
+    }, [])
+
     return (
         <BrowserRouter>
             {isNavigating && <LoadingScreen />}
@@ -40,6 +46,7 @@ const ReactRoute = () => {
                 <Route element={<PrivateRoute />}>
                     <Route path="/" element={<Navigate replace to="/home" />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -127,7 +127,7 @@ const Story = () => {
                         </div>
                     </div>
                     <h3 className="text-white text-xs text-center truncate w-14">
-                        eliefvei_
+                        slebew__
                     </h3>
                 </div>
                 <div className="flex flex-col items-center gap-1 w-full hover:cursor-pointer">
